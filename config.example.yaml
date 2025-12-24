@@ -1,0 +1,188 @@
+# Media Context Crawler Configuration Example
+# Copy this file to config.yaml and update with your actual values
+
+database:
+  host: localhost
+  port: 5432
+  name: media_context_crawler
+  user: postgres
+  password: your_password_here
+  ssl_mode: disable
+  max_connections: 25
+  max_idle_connections: 5
+
+# API keys for various services
+api_keys:
+  # YouTube Data API v3
+  youtube: YOUR_YOUTUBE_API_KEY_HERE
+
+  # Twitter/X API (v2)
+  twitter:
+    api_key: YOUR_TWITTER_API_KEY
+    api_secret: YOUR_TWITTER_API_SECRET
+    access_token: YOUR_ACCESS_TOKEN
+    access_secret: YOUR_ACCESS_SECRET
+    bearer_token: YOUR_BEARER_TOKEN
+
+  # Reddit API
+  reddit:
+    client_id: YOUR_REDDIT_CLIENT_ID
+    client_secret: YOUR_REDDIT_CLIENT_SECRET
+    username: YOUR_REDDIT_USERNAME
+    password: YOUR_REDDIT_PASSWORD
+    user_agent: media-context-crawler/1.0
+
+  # Optional: Additional platforms
+  # tiktok: YOUR_TIKTOK_API_KEY
+  # instagram: YOUR_INSTAGRAM_ACCESS_TOKEN
+
+# Crawler configuration
+crawler:
+  # Maximum depth for tree searches
+  max_depth: 3
+
+  # Maximum nodes per level
+  max_nodes_per_level: 100
+
+  # Rate limiting (requests per minute)
+  rate_limit: 100
+
+  # Number of concurrent crawler workers
+  concurrent_workers: 5
+
+  # Request timeout in seconds
+  request_timeout: 30
+
+  # Retry configuration
+  max_retries: 3
+  retry_delay_seconds: 5
+
+  # User agent for web requests
+  user_agent: "Mozilla/5.0 (compatible; MediaContextCrawler/1.0)"
+
+# Natural Language Processing configuration
+nlp:
+  # Minimum relevance score for keywords (0.0 - 1.0)
+  min_keyword_relevance: 0.7
+
+  # Maximum keywords to extract per video
+  max_keywords: 20
+
+  # Minimum keyword frequency
+  min_keyword_frequency: 2
+
+  # Enable named entity recognition
+  enable_ner: true
+
+  # Enable sentiment analysis
+  enable_sentiment: true
+
+  # Language detection
+  default_language: en
+  auto_detect_language: true
+
+# Tree search configuration
+tree_search:
+  # Search strategy: breadth_first, depth_first, or best_first
+  strategy: breadth_first
+
+  # Branch expansion threshold (minimum relevance to expand)
+  expansion_threshold: 0.6
+
+  # Maximum total nodes in tree
+  max_total_nodes: 1000
+
+  # Enable automatic pruning of low-relevance branches
+  enable_pruning: true
+
+  # Pruning threshold
+  pruning_threshold: 0.3
+
+# Platform-specific settings
+platforms:
+  twitter:
+    enabled: true
+    search_types:
+      - recent
+      - popular
+    max_results_per_search: 100
+    include_retweets: false
+
+  reddit:
+    enabled: true
+    search_types:
+      - posts
+      - comments
+    max_results_per_search: 100
+    sort_by: relevance
+    time_filter: all
+
+  youtube:
+    enabled: true
+    fetch_transcripts: true
+    fetch_comments: true
+    max_comments: 100
+
+# Logging configuration
+logging:
+  # Log level: debug, info, warn, error
+  level: info
+
+  # Log output: stdout, file, or both
+  output: both
+
+  # Log file path (if output includes file)
+  file_path: logs/media-context-crawler.log
+
+  # Enable JSON formatting
+  json_format: false
+
+  # Enable caller information
+  include_caller: true
+
+# Server configuration (for API mode)
+server:
+  # Server host
+  host: 0.0.0.0
+
+  # Server port
+  port: 8080
+
+  # Enable CORS
+  enable_cors: true
+
+  # Allowed origins (if CORS enabled)
+  allowed_origins:
+    - http://localhost:3000
+    - http://localhost:8080
+
+  # API rate limiting (requests per minute per user)
+  api_rate_limit: 60
+
+  # Request timeout
+  request_timeout_seconds: 300
+
+# Storage configuration
+storage:
+  # Content storage path for media files
+  content_path: data/content
+
+  # Cache directory
+  cache_path: data/cache
+
+  # Maximum cache size in MB
+  max_cache_size_mb: 1000
+
+  # Cache TTL in hours
+  cache_ttl_hours: 24
+
+# Feature flags
+features:
+  # Enable experimental features
+  enable_experimental: false
+
+  # Enable telemetry
+  enable_telemetry: false
+
+  # Enable automatic updates
+  enable_auto_updates: false
